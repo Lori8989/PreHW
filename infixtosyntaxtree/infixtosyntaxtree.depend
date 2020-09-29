@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1586513516 source:c:\users\lo898\desktop\學習課程\infixtosyntaxtree\main.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+
+1586513777 source:c:\users\lo898\desktop\學習課程\pass\infixtosyntaxtree\main.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+
