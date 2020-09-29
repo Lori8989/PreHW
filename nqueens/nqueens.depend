@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1572856158 source:c:\users\lo898\desktop\學習課程\nqueens\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1572874751 source:c:\users\lo898\desktop\學習課程\pass\nqueens\main.c
+	<stdio.h>
+	<stdlib.h>
+
