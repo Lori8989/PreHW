@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1572853781 source:c:\users\lo898\desktop\學習課程\batdiv\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1572855052 source:c:\users\lo898\desktop\學習課程\pass\batdiv\main.c
+	<stdio.h>
+	<stdlib.h>
+
