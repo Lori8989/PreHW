@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1579700510 source:c:\users\lo898\desktop\queries on a string\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
