@@ -1,0 +1,34 @@
+There are total 2 supported mouse buttons
+Allegro5 initialized
+Game begin
+resized image: main-bg.jpg
+resized image: start-bg.jpg
+Change scene from 0 to 1
+Game initialized
+Game start event loop
+Key with keycode 67 down
+Change scene from 1 to 2
+stop audio (bgm)
+Key with keycode 67 up
+Key with keycode 82 down
+Key with keycode 82 up
+Key with keycode 82 down
+Key with keycode 82 up
+Key with keycode 157 down
+Key with keycode 75 up
+Mouse move to (554, 10)
+Mouse move to (585, 26)
+Mouse move to (608, 37)
+Mouse move to (639, 53)
+Mouse move to (673, 64)
+Mouse move to (699, 76)
+Mouse move to (718, 85)
+Mouse move to (734, 90)
+Mouse move to (753, 96)
+Mouse move to (769, 101)
+Mouse move to (782, 106)
+Mouse move to (787, 108)
+Mouse move to (790, 111)
+Mouse move to (795, 113)
+Window close button clicked
+Game end

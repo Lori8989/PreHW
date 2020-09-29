@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1570091969 source:c:\users\lo898\desktop\學習課程\多項式\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+
