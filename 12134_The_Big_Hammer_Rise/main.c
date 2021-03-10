@@ -41,3 +41,18 @@ int main()
 39.78 61.80
 */
 
+/*
+//another method
+#include<stdio.h>
+
+int main(){
+    int a_i, a_f, b_i, b_f, ans;
+    scanf("%d.%d %d.%d",&a_i,&a_f,&b_i,&b_f);
+    //let a_i be a*100, so that it is int, so as b
+    a_i = a_i * 100 + a_f;
+    b_i = b_i * 100 + b_f;
+    ans = a_i * b_i;
+    printf("%d.%04d\n", ans/10000, ans%10000);
+    return 0;
+}
+*/
