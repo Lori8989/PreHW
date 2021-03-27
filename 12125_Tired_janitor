@@ -1,0 +1,33 @@
+#include<stdio.h>
+#include <stdlib.h>
+
+long long int prefix[1000010];
+long long int cur;
+
+int main(){
+    int n, q, i = 1;
+    scanf("%d %d",&n,&q);
+
+    scanf("%lld",&cur);
+    prefix[0] = cur;
+    for(; i < n; i++){
+        for(int j = 0; j < 14; j++){
+            getchar();//5(/`A`)/ ~I__I 1
+        }
+        scanf("%lld",&cur);
+        prefix[i] = prefix[i - 1] + cur;
+    }
+        for(int j = 0; j < 14; j++){
+            getchar();//5(/`A`)/ ~I__I 1
+        }
+
+    while(q--){
+        int l, r;
+        scanf(" %d %d", &l, &r);
+        if( l == 1 )
+            printf("%lld\n",prefix[r - 1]);
+        else
+            printf("%lld\n",prefix[r - 1] - prefix[l - 2]);
+    }
+    return 0;
+}
