@@ -49,3 +49,42 @@ int main()
 2 3 4 5 1
 
 */
+
+/*
+#include<stdio.h>
+#include <stdlib.h>
+
+int main(){
+    int n, ord_idx, top = 1;
+    scanf("%d",&n);
+    ord_idx = n;
+    int obj[200020];//line up melons
+
+    for( int i = 0 ; i < n ; i++ ){
+        scanf("%d",&obj[i]);
+    }
+
+    while( ord_idx -- ){
+        int cur_target;
+        scanf("%d", &cur_target);
+        for(int i = 0; i < n; i++){
+            if( cur_target == obj[i] ){
+                if(i < top){
+                    printf("0");
+                }
+                else{
+                    printf("%d",i - top + 2);
+                    top = i + 2;
+                }
+                if( ord_idx ){
+                    printf(" ");
+                }
+                break;
+            }
+        }
+    }
+    printf("\n");
+    return 0;
+}
+
+*/
