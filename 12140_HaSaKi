@@ -1,0 +1,122 @@
+#include <stdio.h>
+#include <string.h>
+char txt[1005], pat[1005];
+int lps[1005], ans[1005];
+
+void computeLPSArray(char* pat, int M);
+
+int main(){
+    
+    int t, l, r, cur_pos = -1;
+    scanf("%s",txt);
+    scanf("%s",pat);
+    memset(ans,0,1003);
+
+    int M = strlen(pat);
+	int N = strlen(txt);
+
+
+	// Preprocess the pattern (calculate lps[] array)
+	computeLPSArray(pat, M);
+
+	int i = 0; // index for txt[]
+	int j = 0; // index for pat[]
+	while (i < N) {
+		if (pat[j] == txt[i]) {
+			j++;
+			i++;
+		}
+
+		if (j == M) {
+			//printf("Found pattern at %d-th\n", i - j + 1);
+            ans[i - j + 1] = 1;
+			j = lps[j - 1];
+		}
+
+		// mismatch after j matches
+		else if (i < N && pat[j] != txt[i]) {
+			// Do not match lps[0..lps[j-1]] characters,
+			// they will match anyway
+			if (j != 0)
+				j = lps[j - 1];
+			else
+				i = i + 1;
+		}
+	}
+    for(int i = 1; i <= strlen(txt); i++){
+        ans[i] = ans[i - 1] + ans[i];
+        //printf("ans[%d] is %d\n",i - 1,ans[i - 1]);
+    }
+
+    scanf("%d",&t);
+    while (t--)
+    {
+        scanf("%d %d", &l, &r);
+		if( l == r && M == 1 ){
+			if(txt[l - 1] == pat[0])
+			    printf("1\n");
+			else
+			    printf("0\n");
+		}
+		else if( r - l + 1  < M ){
+			printf("0\n");
+		}
+		else{
+			int r_edge = r + 1 - M;
+			//printf("%d to %d\n",ans[l - 1],ans[r_edge]);
+			printf("%d\n",ans[r_edge] - ans[l - 1]);
+		}
+    }
+    
+    return 0;
+}
+
+
+// Fills lps[] for given patttern pat[0..M-1]
+void computeLPSArray(char* pat, int M)
+{
+	// length of the previous longest prefix suffix
+	int len = 0;
+
+	lps[0] = 0; // lps[0] is always 0
+
+	// the loop calculates lps[i] for i = 1 to M-1
+	int i = 1;
+	while (i < M) {
+		if (pat[i] == pat[len]) {
+			len++;
+			lps[i] = len;
+			i++;
+		}
+		else // (pat[i] != pat[len])
+		{
+			// This is tricky. Consider the example.
+			// AAACAAAA and i = 7. The idea is similar
+			// to search step.
+			if (len != 0) {
+				len = lps[len - 1];
+
+				// Also, note that we do not increment
+				// i here
+			}
+			else // if (len == 0)
+			{
+				lps[i] = 0;
+				i++;
+			}
+		}
+	}
+    //printf("--%s\n",lps);
+}
+/*
+adaada
+a
+6
+0 5
+0 6
+1 5
+1 6
+2 2
+6 6
+*/
+
