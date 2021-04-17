@@ -1,0 +1,28 @@
+#include <stdio.h>
+
+int nums[25];
+int n, k;
+
+int counts(int,int);
+
+int main(){
+    int ways = 0;
+    scanf("%d %d", &n, &k);
+    for(int i = 0; i < n; i++){
+        scanf("%d", &nums[i]);
+    }
+
+    ways = counts(0,0);
+    printf("%d\n",ways);
+    return 0;
+}
+
+int counts(int cur_idx, int cur_sum){
+    //only try add number's idx bigger than start
+    //base case
+    if( cur_sum > k ) return 0;
+    if( cur_sum == k ) return 1;
+    if( cur_idx > n ) return 0;
+    //try adding by choose or not choose
+    return counts(cur_idx + 1, cur_sum) + counts(cur_idx + 1, cur_sum + nums[cur_idx]);
+}
