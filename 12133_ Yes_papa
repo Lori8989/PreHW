@@ -1,0 +1,54 @@
+
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+
+char str0[100005];
+char str1[100005];
+bool recur_match(int,int,int,int);
+
+int main(){
+    scanf("%s",str0);
+    scanf("%s",str1);
+    bool ans;
+    if(strcmp(str0,str1) == 0){
+        printf("YES\n");
+        return 0;
+    }
+    
+    ans = recur_match(0, strlen(str0) - 1, 0, strlen(str0) - 1);
+
+    if(ans)
+        printf("YES\n");
+    else
+        printf("NO\n");
+    return 0;
+}
+
+bool recur_match(int a_l, int a_r, int b_l, int b_r){
+    int len = a_r - a_l + 1;
+    //printf("compare %d:%d to %d:%d, len = %d\n",a_l,a_r,b_l,b_r,len);
+    int amid = (a_l + a_r) / 2, bmid = (b_r + b_l) / 2;
+    //base case : odd
+    if(len % 2 == 1){
+        //same?
+        for(int i = 0; i < len; i++){
+            if(str0[a_l + i] != str1[b_l + i])
+                return false;
+        }
+        //printf("same\n");
+        return true;
+    }
+    //else recursive
+    //printf("call (%d,%d,%d,%d) && (%d,%d,%d,%d) || (%d,%d,%d,%d) && (%d,%d,%d,%d)\n",a_l,amid,b_l,bmid,amid,a_r,bmid,b_r);
+    if(recur_match(a_l, amid, b_l, bmid)
+        && recur_match(amid + 1, a_r, bmid + 1, b_r)){
+        return true;
+    }
+    if(recur_match(a_l, amid, bmid + 1, b_r)
+        && recur_match(amid + 1, a_r, b_l, bmid))
+        return true;
+//printf("diff\n");
+    return false;
+}
+
