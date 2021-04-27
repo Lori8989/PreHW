@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <math.h>
+
+int main(){
+    char nums[8], nw_nums[8];
+
+    for(int i = 0; i < 3; i++){
+        scanf("%c",&nums[i]);
+        //printf("-%c",nums[i]);
+    }
+    
+    getchar();
+
+    for(int i = 3; i < 6; i++){
+        scanf("%c",&nums[i]);
+        //printf("-%c",nums[i]);
+    }
+    //printf("orig : %s\n",nums);
+    for (int i = 0; i < 3; i++)
+    {
+        nw_nums[i] = nums[2 - i];//the inverse
+    }
+    for (int i = 3; i < 6; i++)
+    {
+        nw_nums[i] = nums[8 - i];//the inverse
+    }//printf("inverse : %s\n",nw_nums);
+    
+    int num = 0, nw_num = 0;
+    for(int i = 0; i < 6; i++){
+        num += (nums[i] - '0') * (int)pow(10,6 - i);
+        nw_num += (nw_nums[i] - '0') * (int)pow(10,6 - i); 
+        //printf("%d %d\n",num,nw_num);       
+    }//build the value
+
+    num += nw_num;
+    
+    float ans = num / 10000.0;
+    printf("%.3lf",ans);
+    return 0;
+}
