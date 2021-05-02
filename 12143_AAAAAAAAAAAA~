@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+//#include "function.h"
+
+
+int BS(int*, int, int);
+#define ll long long int
+int input[(int)2e6];
+int main() {
+    int n, t;
+    scanf( "%d%d", &n, &t );//printf("t = %d\n",t);
+    for( int i = 0 ; i < n ; i++ ) {
+        scanf( "%d", &input[i] );
+    }
+    for( int i = 0 ; i < t ; i++ ){
+        int q;
+        scanf( "%d", &q );//printf("i = %d, t = %d, target = %d\n",i,t,q);
+        printf( "%d is at index: %d\n", q, BS(input, q, n) );
+    }
+    
+    
+    
+    return 0;
+}
+
+int BS(int* arr, int target, int len){
+    //as sorted, try mid
+    int l = 0, r = len - 1;
+    int mid = r / 2;//(0,1)->0, (0,2)->1
+    //printf("(%d,%d) -> %d\n",l,r,mid);
+    while( arr[mid] != target ){
+        //if( l == r ) return l;
+        if(arr[mid] > target){
+            //find left
+            r = mid - 1;
+        }
+        else{
+            //find right
+            l = mid + 1;
+        }
+        mid = (r + l) / 2;
+    //printf("##(%d,%d) -> %d\n",l,r,mid);
+    }
+
+    return mid;
+}
+
+
+
