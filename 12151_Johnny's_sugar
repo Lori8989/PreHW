@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int nums[1005][1005];
+
+int main() {
+    int n;
+    scanf("%d",&n);
+    
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < n; j++)
+            scanf("%d",&nums[i][j]);
+    }
+
+    //find max of each row
+    for(int i = 0; i < n; i++){
+        int max = 0;
+        for(int j = 0; j < n; j++){
+            if(nums[i][j] > max){
+                max = nums[i][j];
+            }
+        }
+        if(i + 1 < n){
+            printf("%d ",max);
+        }
+        else{
+            printf("%d\n",max);
+        }
+    }
+
+    //find min in each col
+    for(int i = 0; i < n; i++){
+        int min = 100000;
+        for(int j = 0; j < n; j++){
+            if(nums[j][i] < min){
+                min = nums[j][i];
+            }
+        }
+        if(i + 1 < n){
+            printf("%d ",min);
+        }
+        else{
+            printf("%d\n",min);
+        }
+    }
+    
+    return 0;
+}
+/*
+4
+1 14 11 16
+9 10 3 12
+13 6 15 8
+13 2 7 4
+*/
