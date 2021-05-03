@@ -1,0 +1,74 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct node{
+    int val;
+    struct node* next;
+    struct node* prev;
+}Node;
+
+Node* create_node(int val){//printf("make%d\n",val);
+    Node *nw = (Node*)malloc(sizeof(Node));
+    nw->val = val;
+    nw->next = NULL;
+    return nw;
+}
+void printlist(Node* head){
+    while(head != NULL){
+        printf("%d\n",head->val);
+        head = head->next;
+    }
+    return;
+}
+
+int main(){
+    int len, cmds;
+    scanf("%d %d",&len,&cmds);
+
+    Node *head, *cur, *tail;
+    head = create_node(1);
+    head->prev = NULL;
+    cur = head;
+    tail = cur;
+    for(int i = 1; i < len; i++){
+        cur->next = create_node(i + 1);
+        cur = cur->next;
+        cur->prev = tail;
+        tail = cur;
+    }
+
+    while(cmds--){
+        int target;
+        scanf("%d",&target);
+        //find the position
+        cur = head;
+        while(cur->val != target){
+            cur = cur->next;
+        }//now cur is the target
+
+        //at end
+        if(cur->next == NULL){
+            cur->prev->next = NULL;
+            head->prev = cur;
+            cur->next = head;
+            cur->prev = NULL;
+            head = cur;
+        }
+        //at head
+        else if(head->val == cur->val){
+            continue;
+        }
+        //let cur be the head
+        else{
+            cur->prev->next = cur->next;
+            cur->next->prev = cur->prev;
+            head->prev = cur;
+            cur->next = head;
+            cur->prev = NULL;
+            head = cur;
+        }
+    }
+        printlist(head);
+        return 0;
+}
+
