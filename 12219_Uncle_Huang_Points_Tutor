@@ -1,0 +1,40 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+long long  int m;
+long long int fastPow(long long int,long long int);
+
+int main(){
+    long long int x, y;
+    scanf("%lld %lld %lld", &x, &y, &m);
+    //printf("%lld , %d = %d\n", x, m, x % m);
+
+    long long int ans;
+    if(m == 0) ans =  0;
+    else{
+        ans = fastPow(x % m, y);
+    }
+
+    printf("%lld\n",ans);
+    return 0;
+}
+
+
+long long int fastPow(long long int x,long long int y){//printf("%lld ^ %lld-> ",x, y);
+    //x^y = x^(y/2) * x^(y/2)
+    if(y == 1) {
+        //printf(" is %lld\n",x%m); 
+        return x % m; 
+    }
+    if(y == 0) {
+        //printf(" is 1\n"); 
+        return 1 % m; 
+    }//1 % m
+    long long int ans = fastPow((x % m) * (x % m) % m, y / 2) % m;
+    if(y % 2 == 1){
+        ans *= x;
+        ans %= m;
+    } 
+    //printf(" is %lld~\n", ans);
+    return ans % m;   
+}
