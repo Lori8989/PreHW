@@ -2,29 +2,28 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-
-//union data structure
-typedef union{
+typedef union{//union: use another(raw) will destroy the former(f)
     float f;
-    struct {
+    struct {//order is important, lsb to msb
         unsigned int mantissa: 23;//bit field limit
         unsigned int exponent: 8;//bit field limit
         unsigned int sign: 1;
     } raw;
 }Float;
 
-//convert to bin and print
 void printBin(int num, int len){
     for(int i = len - 1; i >= 0; i--){
         printf("%d", (num >> i) & 1);
     }
 }
 
-//let float convert to bit0, bit1~8, bit9~31
 void printFloat(float f){
     Float fStruct;
     fStruct.f = f;
+    //printf("f: %f, .f: %f\n",f,fStruct.f);
     //printf("sign:%d\n",fStruct.raw.sign);
+    //printf("exp:%d\n",fStruct.raw.exponent);
+    //printf("mag:%d\n",fStruct.raw.mantissa);
     printBin(fStruct.raw.sign, 1);
     printBin(fStruct.raw.exponent, 8);
     printBin(fStruct.raw.mantissa, 23);
