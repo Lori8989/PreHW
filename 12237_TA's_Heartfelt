@@ -1,0 +1,42 @@
+
+#include<stdio.h>
+#include<stdlib.h>
+
+
+//union data structure
+typedef union{
+    float f;
+    struct {
+        unsigned int mantissa: 23;//bit field limit
+        unsigned int exponent: 8;//bit field limit
+        unsigned int sign: 1;
+    } raw;
+}Float;
+
+//convert to bin and print
+void printBin(int num, int len){
+    for(int i = len - 1; i >= 0; i--){
+        printf("%d", (num >> i) & 1);
+    }
+}
+
+//let float convert to bit0, bit1~8, bit9~31
+void printFloat(float f){
+    Float fStruct;
+    fStruct.f = f;
+    //printf("sign:%d\n",fStruct.raw.sign);
+    printBin(fStruct.raw.sign, 1);
+    printBin(fStruct.raw.exponent, 8);
+    printBin(fStruct.raw.mantissa, 23);
+    printf("\n");
+}
+
+int main(){
+
+    float f = 0;
+    while((scanf("%f", &f)) != EOF){
+        printFloat(f);
+    }
+    
+    return 0;
+}
