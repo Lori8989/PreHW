@@ -1,0 +1,33 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+#include<math.h>
+
+
+int main(){
+    
+    int n;
+    scanf("%d\n",&n);
+    if(n == 1){
+        printf("I'm the god of Knuckles!\n");
+        return 0;
+    }
+    int arr[30] = {0};
+    for(int i = 0; i < n; i++){
+        char cur;
+        scanf("%c",&cur);//printf("*%c",cur);
+        int code = cur - 'a';
+        if(arr[code] == 1){
+            printf("I'm the god of Knuckles!\n");
+            return 0;
+        }
+        else    
+            arr[code] = 1;
+    }
+    //for(int i = 0; i < n; i++)
+    //   printf("[%d]:%d ",i,arr[i]);
+    //printf("\n");
+    //only can have one or no "can't change"(unvaild)
+    printf("Different makes perfect\n");
+    return 0;
+}
