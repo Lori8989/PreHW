@@ -1,0 +1,130 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+typedef struct Chara
+{
+    int hp;
+    int atk;
+    int x;
+    int y;
+}Chara;
+//[x][y]
+int map[6][6] = {0};//map out monsters and me
+Chara monsters[26];
+
+int dfs(Chara me){//printf("me(%d) at (%d,%d)-----",me.hp,me.x,me.y);
+    //[1][1] to [5][5], so only +x, +y
+    //try current
+    int isMonster = map[me.x][me.y];
+    if(me.x == 5 && me.y == 5){
+        if(isMonster == 0){
+            //printf("finish\n");
+            return 1;
+        }
+        else{
+            Chara monster;
+            monster = monsters[isMonster];
+            //printf("has monster, hp,atk: %d,%d\n",monster.hp,monster.atk);
+            while(monster.hp && me.hp){
+                //printf("monster :%d->",monster.hp);
+                monster.hp -= me.atk;
+                //printf("%d\n",monster.hp);
+                if(monster.hp <= 0){
+                    //printf("-pass\n");
+                    return 1;
+                }
+                //printf("me :%d->",me.hp);
+                me.hp -= monster.atk;
+                //printf("%d\n",me.hp);
+                if(me.hp <= 0){
+                    //printf("no!\n");
+                    return 0;
+                }
+            }
+        }
+    }
+    if(isMonster == 0){//printf("no monster\n");
+        //keep going
+        int ans0 = 0, ans1 = 0;
+        Chara nw;//move x
+        nw.hp = me.hp;
+        nw.atk = me.atk;
+        nw.x = me.x + 1;
+        nw.y = me.y;
+        me.y = me.y + 1;//move y
+        if(nw.x < 6){
+            ans0 = dfs(nw);
+        }
+        if(me.y < 6){
+            ans1 = dfs(me);
+        }
+        return ans0 || ans1;
+    }
+    else{
+        //get monster's data
+        Chara monster;
+        monster = monsters[isMonster];
+        //printf("has monster, hp,atk: %d,%d\n",monster.hp,monster.atk);
+        while(monster.hp && me.hp){
+            monster.hp -= me.atk;
+            if(monster.hp <= 0){
+                int ans0 = 0, ans1 = 0;
+                Chara nw;//move x
+                nw.hp = me.hp;
+                nw.atk = me.atk;
+                nw.x = me.x + 1;
+                nw.y = me.y;
+                me.y = me.y + 1;//move y
+                if(nw.x < 6){
+                    ans0 = dfs(nw);
+                }
+                if(me.y < 6){
+                    ans1 = dfs(me);
+                }
+                return ans0 || ans1;
+            }
+            me.hp -= monster.atk;
+            if(me.hp <= 0){
+                return 0;
+            }
+        }
+    }
+}
+
+int main(){
+    Chara me;
+    int k;//monsters' amount
+    scanf("%d %d %d",&me.hp,&me.atk,&k);
+    me.x = 1;
+    me.y = 1;
+
+    for(int i = 1; i <= k; i++){//record monsters
+        scanf("%d %d %d %d",&monsters[i].hp,&monsters[i].atk,&monsters[i].x,&monsters[i].y);
+        map[monsters[i].x][monsters[i].y] = i;
+    }
+
+    /*for(int x = 1; x <= 5; x++){
+        for(int y = 1; y <= 5; y++){
+            printf("%d ",map[x][y]);
+        }
+        printf("\n");
+    }*/
+
+    if(dfs(me)){
+        printf("HEIR OF FIRE DESTROYED\n");
+    }
+    else{
+        printf("YOU DIED\n");
+    }
+    return 0;
+}
+
+/*
+100 20 5
+41 50 5 5
+22 24 2 4
+30 10 1 3
+26 25 2 5
+28 41 1 4
+*/
